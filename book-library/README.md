@@ -1,12 +1,88 @@
-# React + Vite
+📚 Book Library App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React + Vite web application to search for books, explore details, and manage a personal wishlist. The app integrates with the Google Books API to provide real-time book data.
 
-Currently, two official plugins are available:
+🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔍 Search Books — Find books by title, author, or keyword using the Google Books API.
 
-## Expanding the ESLint configuration
+📖 Book Details — View description, authors, publisher, and preview links.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+⭐ Wishlist — Save favorite books to a wishlist (stored in localStorage).
+
+📱 Responsive UI — Works seamlessly on desktop, tablet, and mobile.
+
+🖼️ Favicon & Branding — Custom favicon included.
+
+🌐 Deployed on Vercel for instant access.
+
+🛠️ Tech Stack
+
+⚡ Vite
+ — Fast React development environment
+
+⚛️ React
+ — Front-end library
+
+🎨 TailwindCSS
+ — Styling and responsive design
+
+📚 Google Books API
+ — Book search and data
+
+💾 LocalStorage — Persistent wishlist management
+
+📂 Project Structure
+book-library-app/
+│── public/              # Static assets (favicon, etc.)
+│── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # App pages (Search, Wishlist, etc.)
+│   ├── App.jsx          # Root component
+│   ├── main.jsx         # Entry point
+│── package.json         # Dependencies & scripts
+│── vite.config.js       # Vite configuration
+│── README.md            # Project documentation
+
+⚙️ Installation & Setup
+
+Clone the repo and install dependencies:
+
+git clone https://github.com/your-username/book-library.git
+cd book-library
+npm install
+
+
+Run locally:
+
+npm run dev
+
+
+Build for production:
+
+npm run build
+
+
+Preview production build:
+
+npm run preview
+
+🌍 Deployment
+
+The app is deployed on Vercel. Every push to the main branch automatically triggers a new deployment.
+
+🔗 Live Demo: https://book-library.vercel.app
+
+📝 Future Improvements
+
+🔐 Add user authentication for cloud-synced wishlist
+
+📑 Pagination and advanced filtering
+
+🎨 Dark mode theme toggle
+
+💬 User reviews & ratings
+
+👨‍💻 Author
+
+Achraf Mamounia — Frontend Web Developer in training
