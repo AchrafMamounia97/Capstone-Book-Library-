@@ -1,4 +1,4 @@
-import BookItem from "../components/BookItem";
+import BookCard from "../components/BookCard";
 
 export default function Wishlist({ items, onRemove }) {
   return (
@@ -11,13 +11,16 @@ export default function Wishlist({ items, onRemove }) {
             Your wishlist is empty. Search for books and add them here.
           </div>
         ) : (
-          <ul>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
             {items.map((book) => (
-              <li key={book.id} className="px-4 border-b last:border-none">
-                <BookItem book={book} onRemove={onRemove} />
-              </li>
+              <BookCard
+                key={book.id}
+                book={book}
+                onRemoveFromWishlist={onRemove}
+                isInWishlist={true}
+              />
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </main>

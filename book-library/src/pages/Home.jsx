@@ -1,37 +1,46 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
-import BookItem from "../components/BookItem";
+import BookCard from "../components/BookCard";
 import RightCoverRail from "../components/RightCoverRail";
 
 export default function Home({ onAddToWishlist }) {
-  const [query, setQuery] = useState(""); 
+  const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const apiKey = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
+  const keyParam =
+    apiKey && apiKey !== "YOUR_API_KEY_HERE" ? `&key=${apiKey}` : "";
+
   async function searchBooks(customQuery) {
-    const term = customQuery || query;
-    if (!term.trim()) return;
+    const term = (customQuery ?? query).trim();
+    if (!term) return;
+
     setLoading(true);
     setError("");
+
     try {
-      const res = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-          term
-        )}&maxResults=24`
-      );
+      const url =
+        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(term)}` +
+        `&maxResults=24&printType=books&orderBy=relevance&filter=partial${keyParam}`;
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Network error");
       const data = await res.json();
       setBooks(Array.isArray(data.items) ? data.items : []);
     } catch (e) {
       setError("Something went wrong. Please try again.");
+      setBooks([]);
     } finally {
       setLoading(false);
     }
   }
 
-  // 🔹 Load some trending books on initial page load
+  // Load some books on first visit
   useEffect(() => {
-    searchBooks("bestsellers"); // you can try "trending books", "fiction", "2023 top books"
+    searchBooks("bestsellers");
+    // Alternative seeds that work well: "fiction", "computer science", "self help"
   }, []);
 
   return (
@@ -64,17 +73,16 @@ export default function Home({ onAddToWishlist }) {
               </div>
             )}
 
-            <ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
               {books.map((book) => (
-                <li key={book.id} className="px-4 border-b last:border-none">
-                  <BookItem
-                    book={book}
-                    onAdd={onAddToWishlist}
-                    inWishlist={false}
-                  />
-                </li>
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  onAddToWishlist={onAddToWishlist}
+                  isInWishlist={false}
+                />
               ))}
-            </ul>
+            </div>
           </div>
         </section>
 

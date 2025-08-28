@@ -1,37 +1,56 @@
-export default function Navbar({ activeTab, onTabChange }) {
+import React from "react";
+
+export default function Navbar({ activeTab, onTabChange, wishlistCount, isDarkMode, onToggleDarkMode }) {
   return (
-    <header className="bg-white shadow-soft sticky top-0 z-50">
-      <nav className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 bg-slate-900 rounded-sm" />
-          <span className="font-semibold">BookFinder</span>
-        </div>
+    <nav className="flex items-center justify-between px-6 py-4 bg-slate-900 text-white">
+      {/* App Logo / Name */}
+      <h1
+        className="text-xl font-bold cursor-pointer"
+        onClick={() => onTabChange("landing")}
+      >
+        📚 BookFinder
+      </h1>
 
-        <ul className="flex items-center gap-6 text-sm">
-          <li>
-            <button
-              onClick={() => onTabChange("home")}
-              className={`hover:underline ${
-                activeTab === "home" ? "text-slate-900 font-medium" : "text-slate-600"
-              }`}
-            >
-              Home
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => onTabChange("wishlist")}
-              className={`hover:underline ${
-                activeTab === "wishlist" ? "text-slate-900 font-medium" : "text-slate-600"
-              }`}
-            >
-              Wishlist
-            </button>
-          </li>
-        </ul>
-
-        <div className="w-8 h-8 rounded-full bg-slate-200" aria-label="profile" />
-      </nav>
-    </header>
+      {/* Navigation Tabs */}
+      <div className="flex items-center gap-6">
+        <button
+          onClick={() => onTabChange("home")}
+          className={`hover:text-sky-400 ${
+            activeTab === "home" ? "text-sky-400 font-semibold" : ""
+          }`}
+        >
+          Home
+        </button>
+        <button
+          onClick={() => onTabChange("wishlist")}
+          className={`hover:text-sky-400 flex items-center gap-2 ${
+            activeTab === "wishlist" ? "text-sky-400 font-semibold" : ""
+          }`}
+        >
+          Wishlist
+          {wishlistCount > 0 && (
+            <span className="bg-sky-500 text-white text-xs px-2 py-1 rounded-full">
+              {wishlistCount}
+            </span>
+          )}
+        </button>
+        <button
+          onClick={() => onTabChange("profile")}
+          className={`hover:text-sky-400 ${
+            activeTab === "profile" ? "text-sky-400 font-semibold" : ""
+          }`}
+        >
+          Profile
+        </button>
+        <button
+          onClick={onToggleDarkMode}
+          className="hover:text-sky-400 flex items-center gap-2"
+          title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {isDarkMode ? "🌙" : "☀️"}
+        </button>
+      </div>
+    </nav>
   );
 }
+
